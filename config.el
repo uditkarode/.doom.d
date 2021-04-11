@@ -21,6 +21,8 @@
 (map!
  :g (kbd "<C-right>") 'centaur-tabs-forward
  :g (kbd "<C-left>") 'centaur-tabs-backward
+ :g "M-w" 'forward-word
+ :g "M-s" 'kill-ring-save
  :g "C-t" 'treemacs
  )
 
@@ -29,6 +31,9 @@
 
 ; use C-k as C-p (P is too hard to reach)
 (define-key input-decode-map (kbd "C-k") [?\C-p])
+
+; use C-j as C-n (old habits die hard)
+(define-key input-decode-map (kbd "C-j") [?\C-n])
 
 ; use C-w as M-f (I sometimes use C-w because I'm used to skipping words with w like the vim binding)
 (define-key input-decode-map (kbd "C-w") [?\M-f])
