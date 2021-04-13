@@ -17,7 +17,18 @@
 (add-to-list 'global-mode-string '("" mode-line-keycast))
 (keycast-mode)
 
-; j/k for up and down
+;; open treemacs with keyboard
+(defun +private/treemacs-back-and-forth ()
+  (interactive)
+  (if (treemacs-is-treemacs-window-selected?)
+      (aw-flip-window)
+    (treemacs-select-window)))
+
+(map! :after treemacs
+      :leader
+      :g "-" #'+private/treemacs-back-and-forth)
+
+;; some handy binds
 (map!
  :g (kbd "<C-right>") 'centaur-tabs-forward
  :g (kbd "<C-left>") 'centaur-tabs-backward
@@ -35,16 +46,13 @@
 ; use C-j as C-n (old habits die hard)
 (define-key input-decode-map (kbd "C-j") [?\C-n])
 
-; use C-w as M-f (I sometimes use C-w because I'm used to skipping words with w like the vim binding)
-(define-key input-decode-map (kbd "C-w") [?\M-f])
-
 ; setup projects directory
 (projectile-discover-projects-in-directory "/home/udit/CodingProjects")
 
 ;; use rjsx mode on .tsx files
 (add-to-list 'auto-mode-alist '("components\\/.*\\.tsx\\'" . rjsx-mode))
 
-;; buffer scroll hax
+;; buffer scroll
 (global-set-key "\M-n" "\C-u1\C-v")
 (global-set-key "\M-k" "\C-u1\M-v")
 
